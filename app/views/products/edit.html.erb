@@ -1,2 +1,12 @@
-<h1>Products#edit</h1>
-<p>Find me in app/views/products/edit.html.erb</p>
+<h1>Edit Product</h1>
+
+<ul class="product">
+<li><%= @product.name %></li>
+<li><%= @product.description %></li>
+<li><%= @product.price_in_cents %></li>
+<br />
+<br />
+
+<%= render 'form' %>
+
+<%= link_to 'Back', products_path %>
