@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 	# before_filter :get_product, :only => [:show, :edit, :update, :destroy]
-	before_filter :get_product, only: [:show, :edit, :update, :destroy]
+	# before_filter :get_product, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -12,7 +12,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-  	# @product = Product.find(params[:id])
+  	@product = Product.find(params[:id])
+
+    if current_user
+      @review = @product.reviews.build
+    end
 
   	respond_to do |format|
   		format.html # index.html.erb
@@ -30,7 +34,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-  	# @product = Product.find(params[:id])
+  	@product = Product.find(params[:id])
   end
 
   def create
@@ -48,7 +52,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-  	# @product = Product.find(params[:id])
+  	@product = Product.find(params[:id])
 
   	respond_to do |format|
 	  	if @product.update_attributes product_params
@@ -62,7 +66,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-  	# @product = Product.find(params[:id])
+  	@product = Product.find(params[:id])
   	@product.destroy
   	
   	respond_to do |format|
@@ -76,7 +80,7 @@ class ProductsController < ApplicationController
   	params.require(:product).permit(:name, :description, :price_in_cents)
   end
 
-  def get_product
-  	@product = Product.find(params[:id])
-  end
+  # def get_product
+  # 	@product = Product.find(params[:id])
+  # end
 end
